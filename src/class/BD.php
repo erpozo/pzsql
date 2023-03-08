@@ -16,7 +16,7 @@ class BD {
 
     private mysqli $connect;
 
-    public function __construct($username, $password, $database="") {
+    public function __construct($username, $password) {
         $this->username = $username;
         $this->password = $password;
         try {

@@ -17,9 +17,13 @@ function  getDatabaseList(){
     return $list;
 }
 
-function listTables(string $database){
-    $connect = new BD($_SESSION["user"], $_SESSION["password"], $database);
-    return $connect->Select('SHOW TABLES;');
+function listTablesFrom(string $database){
+    $tables = sql()->Select('SHOW TABLES FROM '.$database.';');
+    $nonArray = [];
+    foreach($tables as $table){
+        $nonArray[] = $table["Tables_in_$database"];
+    }
+    return $nonArray;
 }
 
 function sqlogin($user, $password){
@@ -38,3 +42,8 @@ function sqlogout(){
 function createDatabase($databaseName){
 
 }
+
+function createTable($databaseName, $tableName){
+    sql()->Select('CREATE TABLE '.$database.'.'.$tableName.'('.$tableName.'_id int NOT NULL AUTO_INCREMENT);');
+}
+?>

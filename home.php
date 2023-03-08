@@ -8,7 +8,7 @@
 <html lang="es">
     <head>
         <?php
-            //include "./headinfo.php";
+            include "./headinfo.php";
         ?>
     </head>
 
@@ -18,11 +18,7 @@
         </form>
 
         
-        <form action="./home.php" method="get">
-            <?php
-                databaseInput();
-            ?>
-        </form>
+        <button> </button>
 
         <?php
             if (isset(($_POST['logout']))) {

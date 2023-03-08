@@ -21,7 +21,19 @@ function databaseInput(){
 
 function databaseLinks(){
     foreach( getDatabaseList() as $database){
-        echo "<a href='database.php?database=$database'>$database</a>";
+        echo "<a href='database.php?database=$database'>$database</a><br>";
+    }
+}
+
+function databaseButtons(){
+    foreach( getDatabaseList() as $database){
+        echo "<a href='database.php?database=$database'>$database</a><br>";
+    }
+}
+
+function databaseTableButtons(){
+    foreach( getDatabaseList() as $database){
+        echo "<a href='database.php?database=$database'>$database</a><br>";
     }
 }
 
@@ -37,3 +49,8 @@ function dataToHtml(array|null $array, string $tag){
     }
     return $text;
 }
+
+function printTables(string $database){;
+    return dataToHtml(listTablesFrom($database), "h2");
+}
+?>
