@@ -4,11 +4,21 @@ include "./vendor/autoload.php";
 
 use pzsql\src\class\BD;
 
-function sql(){
+/**
+ * Genera una conexión SQL usando los datos guardados en SESSION
+ *
+ * @return BD
+ */
+function sql():BD{
     return $connect = new BD($_SESSION["user"], $_SESSION["password"]);
 }
 
-function  getDatabaseList(){
+/**
+ * Devuelve todas las bases de datos alojadas en el servidor SQL
+ *
+ * @return array
+ */
+function  getDatabaseList():array{
     $baseDataList = sql()->Select('SHOW DATABASES;');
     $list = [];
     foreach($baseDataList as $database){
@@ -17,8 +27,15 @@ function  getDatabaseList(){
     return $list;
 }
 
-function listTablesFrom(string $database){
+/**
+ * Lista las tablas de una base de datos dada
+ *
+ * @param string Base de datos de la cual
+ * @return array
+ */
+function listTablesFrom(string $database):array{
     $tables = sql()->Select('SHOW TABLES FROM '.$database.';');
+
     $nonArray = [];
     foreach($tables as $table){
         $nonArray[] = $table["Tables_in_$database"];
@@ -26,13 +43,25 @@ function listTablesFrom(string $database){
     return $nonArray;
 }
 
-function sqlogin($user, $password){
+/**
+ * Undocumented function
+ *
+ * @param string $user
+ * @param string $password
+ * @return void
+ */
+function sqlogin(string $user, string $password):void{
     $connect = new BD($user, $password);
     $_SESSION["user"]=$user;
     $_SESSION["password"]=$password;
 }
 
-function sqlogout(){
+/**
+ * Elimina los datos de usuario y te devuelve a la pagina de logeo
+ *
+ * @return void
+ */
+function sqlogout():void{
     echo "logout";
     $_SESSION["user"]="";
     $_SESSION["password"]="";
